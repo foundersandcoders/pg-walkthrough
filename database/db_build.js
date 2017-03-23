@@ -1,8 +1,4 @@
 const fs = require('fs');
-require('env2')('./config.env');
-/* require('env2')('../config.env'); =
-  const env = require('env2');
-  env('./config.env'); */
 
 const dbConnection = require('./db_connection');
 
