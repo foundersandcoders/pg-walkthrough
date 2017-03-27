@@ -15,6 +15,7 @@ Now lets view this data:
 - Running `node src/server.js` in your terminal will start the server.
 - Navigate to `localhost:3000/static` in your browser and you'll see the data served from `static.js` .
 - Navigate to `localhost:3000/dynamic` in your browser and you'll see the data served from `dynamic.js` which queries the database and returns the data from the superheroes table.
+
 __Creating the database__
 - Connect to postgres, `psql` on MAC, and `sudo -u postgres psql` on ubuntu.
 - Create the database by typing `CREATE DATABASE [the name of the database];`.
