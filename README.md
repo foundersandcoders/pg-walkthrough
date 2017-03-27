@@ -17,7 +17,7 @@ Now lets view this data:
 - Navigate to `localhost:3000/dynamic` in your browser and you'll see the data served from `dynamic.js` which queries the database and returns the data from the superheroes table.
 
 __Creating the database__
-- Connect to postgres, `psql` on MAC, and `sudo -u postgres psql` on ubuntu.
+- Connect to postgres, by typing `psql` in your terminal on MAC, and `sudo -u postgres psql` on ubuntu.
 - Create the database by typing `CREATE DATABASE [the name of the database];`.
 - Create a superuser with a password by typing `CREATE USER [the new username] WITH SUPERUSER PASSWORD '[the password of the database]';` (the password needs to be in quotes, otherwise you get an error).
 - Change ownership of the database to the new user by typing `ALTER DATABASE [name of the database] OWNER TO [the new username];`
