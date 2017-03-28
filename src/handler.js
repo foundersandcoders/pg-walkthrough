@@ -12,7 +12,7 @@ const handler = (request, response) => {
     });
     response.end(staticData);
   }
-  
+
   else if(endpoint === 'dynamic'){
     getData((err, res) => {
       if (err) throw err;
