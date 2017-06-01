@@ -1,3 +1,7 @@
+**Author**: [@shiryz](https://github.com/shiryz)  
+
+**Maintainer**: TBC
+
 # Postgres Connection Walkthrough
 
 This exercise is designed to get you familiar with connecting to a database, querying it and viewing that information.
