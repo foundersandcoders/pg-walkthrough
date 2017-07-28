@@ -6,13 +6,12 @@ CREATE TABLE superheroes (
   id SERIAL PRIMARY KEY NOT NULL,
   name VARCHAR(100) NOT NULL,
   superPower TEXT NOT NULL,
-  weight INTEGER,
-  canFly BOOLEAN NOT NULL DEFAULT FALSE
+  weight INTEGER
 );
 
 INSERT INTO superheroes (name, superPower, weight) VALUES
   ('Wolverine', 'Regeneration', 300),
-  ('Captain Marvel', 'Shoots concussive energy bursts from her hands', 165, true),
-  ('Iron Man', 'None', 425, true);
+  ('Captain Marvel', 'Shoots concussive energy bursts from her hands', 165),
+  ('Iron Man', 'None', 425);
 
 COMMIT;
