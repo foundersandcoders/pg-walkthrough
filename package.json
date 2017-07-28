@@ -16,9 +16,5 @@
   "bugs": {
     "url": "https://github.com/shiryz/pg-walkthrough/issues"
   },
-  "homepage": "https://github.com/shiryz/pg-walkthrough#readme",
-  "dependencies": {
-    "env2": "^2.1.1",
-    "pg": "^6.1.5"
-  }
+  "homepage": "https://github.com/shiryz/pg-walkthrough#readme"
 }
