@@ -13,3 +13,10 @@
   - Then we outline the structure of our table. This sets out all the columns we want in our table.
   - We then initialise our table with some data, using `INSERT INTO` and specifying which rows we want to insert data into.
   - we then `COMMIT;` our database.
+
+## Step 3 – connecting the database
+1. Our database is now outlined, but we need a way to connect it. Inside the `/database` folder, create a file called `db_connection.js`.
+  - For this we require the modules `pg` and `env2`, so `npm install --save pg env2` and require them at the top of this file.
+  - You'll notice that this file requires a `config.env`. We'll set this up later.
+2. We also need a way of building our database. In the `/database` folder, create a file called `db_build.js`.
+ - This file builds the database by requiring in our sql file that sets out our schema and using this to query the connection file we just created.
