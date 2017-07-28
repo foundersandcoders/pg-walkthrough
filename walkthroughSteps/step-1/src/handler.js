@@ -12,17 +12,6 @@ const handler = (request, response) => {
     });
     response.end(staticData);
   }
-
-  else if(endpoint === 'dynamic'){
-    getData((err, res) => {
-      if (err) throw err;
-      let dynamicData = JSON.stringify(res);
-      response.writeHead(200,{
-        'content-type': 'application/json'
-      });
-      response.end(dynamicData);
-    });
-  }
 };
 
 module.exports = handler;
