@@ -1,4 +1,5 @@
 const http = require('http');
+const staticSuperHeroes = require('./static.js');
 
 const handler = (request, response) => {
   let endpoint = request.url.split('/')[1];
