@@ -9,12 +9,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/shiryz/pg-walkthrough.git"
+    "url": "git+https://github.com/foundersandcoders/pg-walkthrough.git"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/shiryz/pg-walkthrough/issues"
+    "url": "https://github.com/foundersandcoders/pg-walkthrough/issues"
   },
-  "homepage": "https://github.com/shiryz/pg-walkthrough#readme"
+  "homepage": "https://github.com/foundersandcoders/pg-walkthrough/#readme"
 }
