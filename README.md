@@ -8,10 +8,21 @@ Clone this repo: git clone https://github.com/foundersandcoders/pg-walkthrough.g
 
 ## Learning Outcomes
 
-- Build a database with JS
-- Connect to a database with Node
-- Querying a database with JS
-- Displaying results from a database
+**Building a database**
+- Creating a build script in a `.sql` file
+- Using the DROP and IF EXISTS commands, for use on a `test database`
+- What cascade is for and when to use it
+- Execute a transaction using BEGIN & COMMIT
+
+**Connecting to a database**
+- Connecting to a PostgreSQL server from a node server, including the setup of environment variables (heroku)
+
+**Running queries in Node**
+- Understanding what a connection pool is and how to initialise and configure one using pg
+- Using pool.query with callbacks, to execute single queries to the database
+- Using parameterised queries (to prevent SQL injection)
+- Serving the query results to the front end
+
 
 # Postgres Connection Walkthrough
 
