@@ -22,6 +22,7 @@
 1. Our database is now outlined, but we need a way to connect it. Inside the `/database` folder, create a file called `db_connection.js`.
   - For this we require the modules `pg` and `env2`, so `npm install --save pg env2` and require them at the top of this file.
   - You'll notice that this file requires a `config.env`. We'll set this up later.
+  - `{ Pool }` is syntactic sugar ([destructuring assignment](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment))
 2. We also need a way of building our database. In the `/database` folder, create a file called `db_build.js`.
  - This file builds the database by requiring in our sql file that sets out our schema and using this to query the connection file we just created.
 
