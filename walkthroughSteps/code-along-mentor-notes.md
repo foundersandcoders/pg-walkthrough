@@ -10,6 +10,7 @@
 2. Inside the folder `/database`, create a file called `db_build.sql`. Inside this folder, we're going to set up the structure of our database, as well as inserting some initial data into it. In this file:
   - start the file with `BEGIN;`
   - then add `DROP TABLE IF EXISTS superheroes cascade;`. This line gets drops our old database every time this file is run - i.e. every time we build our database.
+    > This should never be used in production other than for initialisation, since you only want to delete/reset your test database with mock data
   - Then we outline the structure of our table. This sets out all the columns we want in our table.
   - We then initialise our table with some data, using `INSERT INTO` and specifying which rows we want to insert data into.
   - we then `COMMIT;` our database.
