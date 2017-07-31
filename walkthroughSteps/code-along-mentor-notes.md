@@ -38,11 +38,12 @@ Pg is a non-blocking PostgreSQL client for node.js that lets you access SQL valu
 2. We also need a way of building our database. In the `/database` folder, create a file called `db_build.js`.
  - This file builds the database by requiring in our sql file that sets out our schema and using this to query the connection file we just created.
 
-## Step 4 – Actually building and hosting the database
+## Step 4 – Building the database
 1. Now we have all the correct files, let's now get this database up and running.
 2. in the terminal run `psql` (mac) or `sudo -u postgres psql` (linux).
 3. create the database by typing `CREATE DATABASE superheroes;`
 4. Create a user specifically for the database with a password by typing `CREATE USER [the new username] WITH PASSWORD '[the password of the database]'`; (the password needs to be in single-quotes, otherwise you get an error) + (for security: could clear command history and use a password manager - and don't expose port/database to outside world).
+  - This is done so you can connect to the database with a username and password that only has access to the database for the specific application (security: don't use superusers).
 5. Change ownership of the database to the new user by typing `GRANT ALL PRIVILEGES ON DATABASE [name of the database] TO [the new username];`;
 6. Add a config.env file and add the database's url in this format: `DB_URL = postgres://[username]:[password]@localhost:5432/[database]`
 7. Now we build the tables we set out in db_build.sql by running our `db_build.js` file: `node database/db_build.js`.
