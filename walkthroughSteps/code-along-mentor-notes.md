@@ -30,7 +30,7 @@
 5. Change ownership of the database to the new user by typing `ALTER DATABASE [name of the database] OWNER TO [the new username]`;
 6. Add a config.env file and add the database's url in this format: `DB_URL = postgres://[username]:[password]@localhost:5432/[database]`
 7. Now we build the tables we set out in db_build.sql by running our `db_build.js` file: `node database/db_build.js`.
-7. Connect to the database by typing `psql postgres://[username]:[password]@localhost:5432/[database]` and test if everything worked by typing `SELECT * FROM superheroes;`. You should see the data we entered in `db_build.sql` appear.
+8. Connect to the database by typing `psql postgres://[username]:[password]@localhost:5432/[database]` and test if everything worked by typing `SELECT * FROM superheroes;`. You should see the data we entered in `db_build.sql` appear.
 
 ## Step 5 – connecting our database to the server
 1. Let's first write a file that gets our information from the database. In `/src` create a file called `dynamic.js`.
