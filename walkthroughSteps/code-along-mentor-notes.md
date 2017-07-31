@@ -13,7 +13,7 @@ npm i
 ## Step 2 – setting up the database
 1. If we want to serve the data from our database instead, we then need to set up our database.
 2. Inside the folder `/database`, create a file called `db_build.sql`. Inside this folder, we're going to set up the structure of our database, as well as inserting some initial data into it. In this file:
-  - start the file with `BEGIN;`
+  - start the file with `BEGIN;` - This defines the start of a transaction: `a unit/sequence of work that is performed against a database` that can be rolled back or committed.
   - then add `DROP TABLE IF EXISTS superheroes cascade;`. This line gets drops our old database every time this file is run - i.e. every time we build our database.
     > This should never be used in production other than for initialisation, since you only want to delete/reset your test database with mock data
 
@@ -21,7 +21,7 @@ npm i
   - Then we outline the structure of our table. This sets out all the columns we want in our table.
     - Use `DEFAULT 100` to set a default weight (instead of NULL)
   - We then initialise our table with some data, using `INSERT INTO` and specifying which rows we want to insert data into.
-  - we then `COMMIT;` our database.
+  - we then `COMMIT;` our database - to confirm and execute the entire transaction.
 
 ## Step 3 – connecting and building the database
 1. Our database is now outlined, but we need a way to connect it. Inside the `/database` folder, create a file called `db_connection.js`.
@@ -47,4 +47,4 @@ npm i
 3. Write a function that connects to the database and uses a SQL query to select all the data from it and returns it to our server. Export this so we can require it in our handler.
 4. This function should take in a cb, that we use the error first callback method with to handle our errors.
 5. Back in `handler.js`, we require in the file we just wrote, and write an endpoint for `/dynamic`, which uses the data we get back from the database.
-6. Navigate to `http://localhost:3000/dynamic` to check it's worked. 
+6. Navigate to `http://localhost:3000/dynamic` to check it's worked.
