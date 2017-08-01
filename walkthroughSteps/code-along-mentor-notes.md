@@ -33,14 +33,14 @@ git clone https://github.com/foundersandcoders/pg-walkthrough.git
         - Cascade will delete tables with relations (that have a REFERENCE defined towards) to `superheroes` too.
 
     3. Write the schema:
-    ```sql
-    CREATE TABLE superheroes (
-      id SERIAL PRIMARY KEY,
-      name VARCHAR(100) NOT NULL,
-      superPower TEXT NOT NULL,
-      weight INTEGER DEFAULT 100
-    );
-    ```
+        ```sql
+        CREATE TABLE superheroes (
+          id SERIAL PRIMARY KEY,
+          name VARCHAR(100) NOT NULL,
+          superPower TEXT NOT NULL,
+          weight INTEGER DEFAULT 100
+        );
+        ```
     
         - All tables should have an integer `id` that is set as a `PRIMARY KEY` - this is used relate databased together (integer PRIMARY KEY helps with performance)
         - `VARCHAR(LENGTH)`, `INTEGER`, `TEXT` (unlimited length, but larger data usage), etc are SQL data types.
@@ -48,12 +48,12 @@ git clone https://github.com/foundersandcoders/pg-walkthrough.git
         - `DEFAULT 100` changes `NULL` values to be `100`.
 
     4. Initialise some mock/hardcoded data:
-    ```sql
-    INSERT INTO superheroes (name, superPower, weight) VALUES
-      ('Wolverine', 'Regeneration', 300),
-      ('Captain Marvel', 'Shoots concussive energy bursts from her hands', 165),
-      ('Iron Man', 'None', 425);
-    ```
+        ```sql
+        INSERT INTO superheroes (name, superPower, weight) VALUES
+          ('Wolverine', 'Regeneration', 300),
+          ('Captain Marvel', 'Shoots concussive energy bursts from her hands', 165),
+          ('Iron Man', 'None', 425);
+        ```
     
         - Rows separated with commas and each bracket, `(comma-separated values inside here)`, has a row inside it with values
 
@@ -70,25 +70,25 @@ Our database is now outlined, but we need a way to connect it
 2. Install the npm packages `pg` and `env2`: `npm i pg env2`
 
 3. Import `Pool`, `url` and `env2`:
-  ```js
-  const { Pool } = require('pg');
-  const url = require('url');
-  require('env2')('./config.env');
+    ```js
+    const { Pool } = require('pg');
+    const url = require('url');
+    require('env2')('./config.env');
 
-  if (!process.env.DB_URL) throw new Error('Environment variable DB_URL must be set');
-  ```
+    if (!process.env.DB_URL) throw new Error('Environment variable DB_URL must be set');
+    ```
   
     - `{ Pool }` is syntactic sugar (shorten/simplify syntax with abstraction) ([destructuring assignment](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment)) that is equivalent to:
-    ```js
-    const pg = require('pg');
-    const Pool = pg.Pool;
-    ```
+        ```js
+        const pg = require('pg');
+        const Pool = pg.Pool;
+        ```
     
-        - [`Connection pooling`](https://en.wikipedia.org/wiki/Connection_pool) is a cache of multiple database connections that are kept open for a timeout period (`idleTimeoutMillis`) and reused when future requests are required, minimising the resource impact of opening/closing connections constantly for write/read heavy apps. Reusing connections minimises latency too. Debug/demo logging `Pool` might be helpful.
-        - `url` is a Node module - `url.parse()` will be used later
-        - You'll notice that this file requires a `config.env`. We'll set this up later.
-        - This is a *gitignored* file with environment variables which are accessed with `process.env.NAME_HERE` and can be set in `config.env` *OR* production environments with `Heroku`
-        - The if statement will deliberately crash the script if the _connection information_ variable is missing
+    - [`Connection pooling`](https://en.wikipedia.org/wiki/Connection_pool) is a cache of multiple database connections that are kept open for a timeout period (`idleTimeoutMillis`) and reused when future requests are required, minimising the resource impact of opening/closing connections constantly for write/read heavy apps. Reusing connections minimises latency too. Debug/demo logging `Pool` might be helpful.
+    - `url` is a Node module - `url.parse()` will be used later
+    - You'll notice that this file requires a `config.env`. We'll set this up later.
+    - This is a *gitignored* file with environment variables which are accessed with `process.env.NAME_HERE` and can be set in `config.env` *OR* production environments with `Heroku`
+    - The if statement will deliberately crash the script if the _connection information_ variable is missing
 
 4. Parse the URL and authentication info with this code:
     ```js
@@ -98,10 +98,10 @@ Our database is now outlined, but we need a way to connect it
     
     - `url.parse(<url string here>)` will split a URL/HREF string into an object of values like `protocol`, `auth`, `hostname`, `port`: [URL split documentation](https://nodejs.org/api/url.html#url_url_strings_and_url_objects)
     - `[username, password]` is a ES6 destructuring assignment that is syntactic sugar for:
-    ```js
-    const username = params.auth.split(':')[0];
-    const password = params.auth.split(':')[1];
-    ```
+        ```js
+        const username = params.auth.split(':')[0];
+        const password = params.auth.split(':')[1];
+        ```
     
     Where username is index 0 of `params.auth.split(':')` and password is index 1, and so on.
 
