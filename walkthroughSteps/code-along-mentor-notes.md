@@ -3,7 +3,6 @@
 ## Getting Started
 ```sh
 git clone https://github.com/foundersandcoders/pg-walkthrough.git
-npm i
 ```
 
 ## Step 1 – Navigating the initial files
