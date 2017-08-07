@@ -25,7 +25,7 @@ git clone https://github.com/foundersandcoders/pg-walkthrough.git
         - Clarify that the init queries should be written between these lines (so BEGIN and COMMIT wrap around them).
         - The code inside it is a transaction, so the multiple queries are run as one query/chunk. If an error occurs inside of here, it will rollback the previous commands, preventing messing up the database. Can think of it as SQL error handling
 
-    2. Write `DROP TABLE IF EXISTS superheroes cascade;`.
+    2. Write `DROP TABLE IF EXISTS superheroes CASCADE;`.
         - This line drops our database each time this file is run.
         > ONLY RUN IT ONCE. This file should never be used in production other than for initialisation. You only want to use this to reset your test database (and can add mock data for it).
 
