@@ -121,6 +121,7 @@ Our database is now outlined, but we need a way to connect it
     
     - Use an appropriate number for `max`. More connections mean more memory is used, and too many can crash the database server. Always return connections to the pool (don't block/freeze query callbacks), or the pool will deplete. More connections mean more queries can be run at once and more redundancy incase connections are blocked/frozen.
     - `ssl` will enable SSL (set to true) if you're not testing on a local machine.
+        - TLS / SSL (Secure Sockets Layer) ensures that you are connecting to the database from a secure server, when set to `true`, preventing external networks from being able to read/manipulate database queries with MITM attacks
 
 6. Export the Pool object with options with:
     ```js
