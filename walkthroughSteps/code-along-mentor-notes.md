@@ -43,6 +43,7 @@ git clone https://github.com/foundersandcoders/pg-walkthrough.git
         ```
     
         - All tables should have an integer `id` that is set as a `PRIMARY KEY` - this is used relate databased together (integer PRIMARY KEY helps with performance)
+        - `PRIMARY KEY` also adds `UNIQUE` and `NOT NULL` (primary keys have to be unique).
         - `VARCHAR(LENGTH)`, `INTEGER`, `TEXT` (unlimited length, but larger data usage), etc are SQL data types.
         - `NOT NULL` tells the PostgreSQL to give an error if this is not set.
         - `DEFAULT 100` changes `NULL` values to be `100`.
