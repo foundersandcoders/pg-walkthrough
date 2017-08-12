@@ -20,5 +20,8 @@
   "dependencies": {
     "env2": "^2.1.1",
     "pg": "^6.1.5"
+  },
+  "devDependencies": {
+    "nodemon": "^1.11.0"
   }
 }

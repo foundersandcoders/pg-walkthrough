@@ -17,4 +17,7 @@
     "url": "https://github.com/shiryz/pg-walkthrough/issues"
   },
   "homepage": "https://github.com/shiryz/pg-walkthrough#readme",
+  "devDependencies": {
+    "nodemon": "^1.11.0"
+  }
 }
