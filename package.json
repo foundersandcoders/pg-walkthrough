@@ -16,5 +16,8 @@
   "bugs": {
     "url": "https://github.com/foundersandcoders/pg-walkthrough/issues"
   },
-  "homepage": "https://github.com/foundersandcoders/pg-walkthrough/#readme"
+  "homepage": "https://github.com/foundersandcoders/pg-walkthrough/#readme",
+  "devDependencies": {
+    "nodemon": "^1.11.0"
+  }
 }
