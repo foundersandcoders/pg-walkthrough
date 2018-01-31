@@ -228,7 +228,10 @@ If you experience permission problems, try running `psql superheroes` then `GRAN
 
 7. Navigate to `http://localhost:3000/dynamic` to check it's worked.
 
+
 - Now, let's write another function that inserts data into the database.
+
+
 1. Inside `src/dynamic.js`, write an asynchronous function `insertData` that takes a superhero information and a callback, and returns the callback function:
 ```js
 const insertData = (superHeroInfo, cb) => {
