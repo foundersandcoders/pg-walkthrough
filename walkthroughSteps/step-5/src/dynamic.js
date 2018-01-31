@@ -8,4 +8,12 @@ const getData = (cb) =>{
   });
 };
 
-module.exports = getData;
+const insertData = (superHeroInfo, cb) => {
+  const { name, superPower, weight } = superHeroInfo;
+  dbConnection.query(`INSERT INTO superheroes (name, superPower, weight) VALUES (${name}, ${superPower}, ${weight})`, (err, res) => {
+    if (err) return cb(err)
+    return cb(null, res)
+  });
+};
+
+module.exports = { getData, insertData };
