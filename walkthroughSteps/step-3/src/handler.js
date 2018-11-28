@@ -1,15 +1,15 @@
-const staticSuperHeroes = require("./static.js")
+const staticSuperHeroes = require('./static.js');
 
 const handler = (request, response) => {
-  let endpoint = request.url.split("/")[1]
+  let endpoint = request.url.split('/')[1];
 
-  if (endpoint === "static") {
-    let staticData = JSON.stringify(staticSuperHeroes)
+  if (endpoint === 'static') {
+    let staticData = JSON.stringify(staticSuperHeroes);
     response.writeHead(200, {
-      "content-type": "application/json",
-    })
-    response.end(staticData)
+      'content-type': 'application/json',
+    });
+    response.end(staticData);
   }
-}
+};
 
-module.exports = handler
+module.exports = handler;

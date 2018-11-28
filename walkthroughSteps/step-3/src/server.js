@@ -8,6 +8,6 @@ const startServer = () => {
   server.listen(port, () => {
     console.log(`Magic happens on port ${port}`);
   });
-}
+};
 
 startServer();
