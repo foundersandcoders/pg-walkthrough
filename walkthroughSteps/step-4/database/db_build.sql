@@ -3,7 +3,7 @@ BEGIN;
 DROP TABLE IF EXISTS superheroes cascade;
 
 CREATE TABLE superheroes (
-  id SERIAL PRIMARY KEY NOT NULL,
+  id SERIAL PRIMARY KEY,
   name VARCHAR(100) NOT NULL,
   superPower TEXT NOT NULL,
   weight INTEGER DEFAULT 100
