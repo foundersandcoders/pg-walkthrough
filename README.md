@@ -9,7 +9,7 @@ Clone this repo: git clone https://github.com/foundersandcoders/pg-walkthrough.g
 ## Learning Outcomes
 
 **Building a database**
-- Creating a build script in a `.sql` file
+- Creating a build script in an `.sql` file
 - Using the DROP and IF EXISTS commands, for use on a `test database`
 - What cascade is for and when to use it
 - Execute a transaction using BEGIN & COMMIT
