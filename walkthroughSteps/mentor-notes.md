@@ -215,7 +215,6 @@ Let's first write a file that gets our information from the database.
 
 6. Following `if(endpoint === 'static'){ ... }`
 add `else if (endpoint === 'dynamic'){ ... }`
-
 Inside the `'dynamic'` endpoint, call getData with a callback function:
     ```js
     else if (endpoint === 'dynamic'){  
