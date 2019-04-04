@@ -10,7 +10,7 @@ git clone https://github.com/foundersandcoders/pg-walkthrough.git
 ## Step 1 – Navigating the initial files
 1. Open `src/handler.js`.
     - Here we see the `/static` endpoint reads and serves a file called `static.js`.
-  
+
 2. Open `src/static.js`
     - We see that it contains a data array with two superhero objects.
 
@@ -43,7 +43,7 @@ git clone https://github.com/foundersandcoders/pg-walkthrough.git
           weight INTEGER DEFAULT 100
         );
         ```
-    
+
         - All tables should have an integer `id` that is set as a `PRIMARY KEY` - this is used relate databased together (integer PRIMARY KEY helps with performance)
         - `PRIMARY KEY` also adds `UNIQUE` and `NOT NULL` (primary keys have to be unique).
         - `VARCHAR(LENGTH)`, `INTEGER`, `TEXT` (unlimited length, but larger data usage), etc are SQL data types.
@@ -57,7 +57,7 @@ git clone https://github.com/foundersandcoders/pg-walkthrough.git
           ('Captain Marvel', 'Shoots concussive energy bursts from her hands', 165),
           ('Iron Man', 'None', 425);
         ```
-    
+
         - Rows separated with commas and each bracket, `(comma-separated values inside here)`, has a row inside it with values
 
 
@@ -80,13 +80,13 @@ Our database is now outlined, but we need a way to connect it
 
     if (!process.env.DB_URL) throw new Error('Environment variable DB_URL must be set');
     ```
-  
+
     - `{ Pool }` is syntactic sugar (shorten/simplify syntax with abstraction) ([destructuring assignment](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment)) that is equivalent to:
         ```js
         const pg = require('pg');
         const Pool = pg.Pool;
         ```
-    
+
     - [`Connection pooling`](https://en.wikipedia.org/wiki/Connection_pool) is a cache of multiple database connections that are kept open for a timeout period (`idleTimeoutMillis`) and reused when future requests are required, minimising the resource impact of opening/closing connections constantly for write/read heavy apps. Reusing connections minimises latency too. Debug/demo logging `Pool` might be helpful.
     - `url` is a Node module - `url.parse()` will be used later
     - You'll notice that this file requires a `config.env`. We'll set this up later.
@@ -98,14 +98,14 @@ Our database is now outlined, but we need a way to connect it
     const params = url.parse(process.env.DB_URL);
     const [username, password] = params.auth.split(':');
     ```
-    
+
     - `url.parse(<url string here>)` will split a URL/HREF string into an object of values like `protocol`, `auth`, `hostname`, `port`: [URL split documentation](https://nodejs.org/api/url.html#url_url_strings_and_url_objects)
     - `[username, password]` is a ES6 destructuring assignment that is syntactic sugar for:
         ```js
         const username = params.auth.split(':')[0];
         const password = params.auth.split(':')[1];
         ```
-    
+
     Where username is index 0 of `params.auth.split(':')` and password is index 1, and so on.
 
 5. Create a [`pg options`](https://node-postgres.com/features/connecting#programmatic) object:
@@ -120,7 +120,7 @@ Our database is now outlined, but we need a way to connect it
       ssl: params.hostname !== 'localhost',
     }
     ```
-    
+
     - Use an appropriate number for `max`. More connections mean more memory is used, and too many can crash the database server. Always return connections to the pool (don't block/freeze query callbacks), or the pool will deplete. More connections mean more queries can be run at once and more redundancy incase connections are blocked/frozen.
     - `ssl` will enable SSL (set to true) if you're not testing on a local machine.
         - TLS / SSL (Secure Sockets Layer) ensures that you are connecting to the database from a secure server, when set to `true`, preventing external networks from being able to read/manipulate database queries with MITM attacks
@@ -129,7 +129,7 @@ Our database is now outlined, but we need a way to connect it
     ```js
     module.exports = new Pool(options);
     ```
-    
+
     - This exports the Pool constructor/object with the previously set options object, for other files to use this connection pool with `dbConnection.query` where `dbConnection` is the exported `Pool`.
 
 7. Create a file: `database/db_build.js` with this code:
@@ -145,7 +145,7 @@ Our database is now outlined, but we need a way to connect it
       console.log("Super heroes table created with result: ", res);
     });
     ```
-    
+
     - Where `fs` is the Node file system module.
     - `dbConnection` is the previously exported pool object.
     - `sql` is a string of the build script. Think of it as a single query (transaction / collection of queries compiled into one).
@@ -199,7 +199,7 @@ Let's first write a file that gets our information from the database.
       });
     };
     ```
-    
+
     - If there's an error, return `cb(err)` - the return prevents the success code running.
     - `res.rows` is an array of objects, where the objects are columns and values.
 
@@ -213,9 +213,13 @@ Let's first write a file that gets our information from the database.
     const getData = require('./dynamic');
     ```
 
-6. Inside the `'dynamic'` endpoint, call getData with a callback function:
+6. Following `if(endpoint === 'static'){ ... }`
+add `else if (endpoint === 'dynamic'){ ... }`
+
+Inside the `'dynamic'` endpoint, call getData with a callback function:
     ```js
-    getData((err, res) => {
+    else if (endpoint === 'dynamic'){  
+       getData((err, res) => {
           if (err) return console.log(err);
 
           let dynamicData = JSON.stringify(res);
@@ -223,9 +227,10 @@ Let's first write a file that gets our information from the database.
           response.writeHead(200, { 'content-type': 'application/json' });
 
           response.end(dynamicData);
-        });
+       });
+    }
     ```
-    
+
     - `getData` is asynchronous, so `response.end` should be inside it, so it doesn't run before the data comes back from the database request (same as an API request).
 
 7. Navigate to `http://localhost:3000/dynamic` to check it's worked.
