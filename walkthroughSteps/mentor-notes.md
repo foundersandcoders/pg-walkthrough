@@ -218,7 +218,8 @@ Let's first write a file that gets our information from the database.
 Still inside the `handler` function.
 
 For the `'dynamic'` endpoint, which we are importing from `('./dynamic)` as `getData`, call getData with a `(error, response)` callback function:
-    ```js
+
+    ```
        getData((err, res) => {
           if (err) return console.log(err);
 
@@ -230,6 +231,6 @@ For the `'dynamic'` endpoint, which we are importing from `('./dynamic)` as `get
        });
     ```
 
-    - `getData` is asynchronous, so `response.end` should be inside it, so it doesn't run before the data comes back from the database request (same as an API request).
+- `getData` is asynchronous, so `response.end` should be inside it, so it doesn't run before the data comes back from the database request (same as an API request).
 
 7. Navigate to `http://localhost:3000/dynamic` to check it's worked.
