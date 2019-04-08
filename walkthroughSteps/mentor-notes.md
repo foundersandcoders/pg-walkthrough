@@ -213,11 +213,12 @@ Let's first write a file that gets our information from the database.
     const getData = require('./dynamic');
     ```
 
-6. Following `if(endpoint === 'static'){ ... }`
-add `else if (endpoint === 'dynamic'){ ... }`
-Inside the `'dynamic'` endpoint, call getData with a callback function:
+6. After the static endpoint if statement : `if(endpoint === 'static'){ ... }`
+
+Still inside the `handler` function.
+
+For the `'dynamic'` endpoint, which we are importing from `('./dynamic)` as `getData`, call getData with a `(error, response)` callback function:
     ```js
-    else if (endpoint === 'dynamic'){  
        getData((err, res) => {
           if (err) return console.log(err);
 
@@ -227,7 +228,6 @@ Inside the `'dynamic'` endpoint, call getData with a callback function:
 
           response.end(dynamicData);
        });
-    }
     ```
 
     - `getData` is asynchronous, so `response.end` should be inside it, so it doesn't run before the data comes back from the database request (same as an API request).
