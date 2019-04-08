@@ -13,7 +13,6 @@ const handler = (request, response) => {
     response.end(staticData);
   }
 
-  else if(endpoint === 'dynamic'){
     getData((err,res) => {
       if (err) return console.log(err);//
       let dynamicData = JSON.stringify(res);
@@ -22,7 +21,6 @@ const handler = (request, response) => {
     });
     response.end(dynamicData);
     });
-  }
 }
 
 module.exports = handler;
