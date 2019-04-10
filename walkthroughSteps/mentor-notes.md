@@ -160,7 +160,7 @@ Now that we have all the correct files, let's get this database up and running.
 
 1. In your command line, run `psql` (Mac/Linux) or `sudo -u postgres psql` (Linux).
 
-2. Create the database by typing `CREATE DATABASE superheroes;` into your Postgres CLI client.
+2. Create the database by typing `CREATE DATABASE film;` into your Postgres CLI client.
 
 3. Create a user specifically for the database with a password by typing `CREATE USER [the new username] WITH PASSWORD '[the password of the database]'`;
     - The password needs to be in single-quotes, otherwise you get an error
@@ -176,7 +176,7 @@ Now that we have all the correct files, let's get this database up and running.
 
 7. Try connecting to the database by typing `psql postgres://[username]:[password]@localhost:5432/[database]` and test if everything worked by typing `SELECT * FROM superheroes;`. You should see the data we entered in `db_build.sql` appear.
 
-If you experience permission problems, try running `psql superheroes` then `GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA public TO [the new username];`
+If you experience permission problems, try running `psql film` then `GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA public TO [the new username];`
 
 ## Step 5 – connecting to our database from the server
 Let's first write a file that gets our information from the database.
