@@ -186,7 +186,7 @@ Let's first write a file that gets our information from the database.
 
 2. Import `db_connection.js`:
     ```js
-    const dbConnection = require('../databases/db_connection');
+    const dbConnection = require('../database/db_connection');
     ```
 
 3. Write an asynchronous `getData` function that takes and returns a callback.
