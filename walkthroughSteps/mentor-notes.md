@@ -72,13 +72,14 @@ Our database is now outlined, but we need a way to connect it
 
 2. Install the npm packages `pg` and `env2`: `npm i pg env2`
 
-3. Import `Pool`, `url` and `env2`:
+3. Import `Pool` and `env2`:
     ```js
     const { Pool } = require('pg');
-    const url = require('url');
     require('env2')('./config.env');
+    
+    const connectionString = process.env.DB_URL;
 
-    if (!process.env.DB_URL) throw new Error('Environment variable DB_URL must be set');
+    if (!connectionString) throw new Error('Environment variable DB_URL must be set');
     ```
 
     - `{ Pool }` is syntactic sugar (shorten/simplify syntax with abstraction) ([destructuring assignment](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment)) that is equivalent to:
@@ -88,51 +89,24 @@ Our database is now outlined, but we need a way to connect it
         ```
 
     - [`Connection pooling`](https://en.wikipedia.org/wiki/Connection_pool) is a cache of multiple database connections that are kept open for a timeout period (`idleTimeoutMillis`) and reused when future requests are required, minimising the resource impact of opening/closing connections constantly for write/read heavy apps. Reusing connections minimises latency too. Debug/demo logging `Pool` might be helpful.
-    - `url` is a Node module - `url.parse()` will be used later
     - You'll notice that this file requires a `config.env`. We'll set this up later.
     - This is a *gitignored* file with environment variables which are accessed with `process.env.NAME_HERE` and can be set in `config.env` *OR* production environments with `Heroku`
     - The if statement will deliberately crash the script if the _connection information_ variable is missing
 
-4. Parse the URL and authentication info with this code:
+4. Export the Pool object with the connection string
+
     ```js
-    const params = url.parse(process.env.DB_URL);
-    const [username, password] = params.auth.split(':');
+    module.exports = new Pool({
+      connectionString,
+      ssl: !connectionString.includes("localhost")
+    });
     ```
 
-    - `url.parse(<url string here>)` will split a URL/HREF string into an object of values like `protocol`, `auth`, `hostname`, `port`: [URL split documentation](https://nodejs.org/api/url.html#url_url_strings_and_url_objects)
-    - `[username, password]` is a ES6 destructuring assignment that is syntactic sugar for:
-        ```js
-        const username = params.auth.split(':')[0];
-        const password = params.auth.split(':')[1];
-        ```
+    - This exports the Pool constructor/object with the connection string, for other files to use this connection pool with `dbConnection.query` where `dbConnection` is the exported `Pool`.
+    - The connection string contains important values such as the `host`, `port`, `username`, `password` and the name of the database. The Pool object uses these individual values to connect with the database.
 
-    Where username is index 0 of `params.auth.split(':')` and password is index 1, and so on.
 
-5. Create a [`pg options`](https://node-postgres.com/features/connecting#programmatic) object:
-    ```js
-    const options = {
-      host: params.hostname,
-      port: params.port,
-      database: params.pathname.split('/')[1],
-      max: process.env.DB_MAX_CONNECTIONS || 2,
-      user: username,
-      password,
-      ssl: params.hostname !== 'localhost',
-    }
-    ```
-
-    - Use an appropriate number for `max`. More connections mean more memory is used, and too many can crash the database server. Always return connections to the pool (don't block/freeze query callbacks), or the pool will deplete. More connections mean more queries can be run at once and more redundancy incase connections are blocked/frozen.
-    - `ssl` will enable SSL (set to true) if you're not testing on a local machine.
-        - TLS / SSL (Secure Sockets Layer) ensures that you are connecting to the database from a secure server, when set to `true`, preventing external networks from being able to read/manipulate database queries with MITM attacks
-
-6. Export the Pool object with options with:
-    ```js
-    module.exports = new Pool(options);
-    ```
-
-    - This exports the Pool constructor/object with the previously set options object, for other files to use this connection pool with `dbConnection.query` where `dbConnection` is the exported `Pool`.
-
-7. Create a file: `database/db_build.js` with this code:
+5. Create a file: `database/db_build.js` with this code:
     ```js
     const fs = require('fs');
 
