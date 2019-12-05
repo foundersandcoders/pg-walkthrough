@@ -79,7 +79,7 @@ Our database is now outlined, but we need a way to connect it
     
     const connectionString = process.env.DB_URL;
 
-    if (!process.env.DB_URL) throw new Error('Environment variable DB_URL must be set');
+    if (!connectionString) throw new Error('Environment variable DB_URL must be set');
     ```
 
     - `{ Pool }` is syntactic sugar (shorten/simplify syntax with abstraction) ([destructuring assignment](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment)) that is equivalent to:
